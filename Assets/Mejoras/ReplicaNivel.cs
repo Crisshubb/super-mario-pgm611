@@ -5,23 +5,23 @@ using System.Collections.Generic;
 public class ReplicaNivel:MonoBehaviour
 {
  public static ReplicaNivel Actual;public int tipo;public float longitud=192;
- public Texture2D mapa;public TextAsset geometria;public GameObject mario,goomba,koopa,moneda;public Sprite ladrillo,duro,tubo,jefe,pez,calamar,fuego;
+ public Texture2D mapa;public TextAsset geometria;public GameObject mario,goomba,koopa,moneda;public Sprite ladrillo,duro,tubo,jefe,pez,calamar,fuego;public Sprite[] pezAnimacion,calamarAnimacion;
  public Transform jugador;public bool terminado;public List<GameObject> puente=new List<GameObject>();public GameObject bowser;
  [System.Serializable]public class Celda{public int x,y;}
  [System.Serializable]public class Datos{public Celda[] cells;}
  void Awake(){Actual=this;}
  void OnDestroy(){if(Actual==this)Actual=null;}
  void Start(){
-  Camera.main.orthographic=true;Camera.main.orthographicSize=7.5f;Camera.main.backgroundColor=tipo==2?new Color(.12f,.02f,.03f):Color.black;Camera.main.transform.position=new Vector3(8,6.5f,-10);
+  Camera.main.orthographic=true;Camera.main.orthographicSize=7.5f;Camera.main.backgroundColor=tipo==2?new Color(.12f,.02f,.03f):tipo==1?new Color32(32,56,236,255):Color.black;Camera.main.transform.position=new Vector3(Camera.main.orthographicSize*Camera.main.aspect-.5f,6.5f,-10);
   if(tipo<2){
-   var s=Sprite.Create(mapa,new Rect(0,tipo==0?240:0,3072,240),new Vector2(.5f,.5f),16);var g=new GameObject("Replica visual del mapa");g.AddComponent<SpriteRenderer>().sprite=s;g.GetComponent<SpriteRenderer>().sortingOrder=-100;g.transform.position=new Vector3(95.5f,7,0);
+   var s=Sprite.Create(mapa,new Rect(0,tipo==0?240:0,3072,208),new Vector2(.5f,.5f),16);var g=new GameObject("Replica visual del mapa");g.AddComponent<SpriteRenderer>().sprite=s;g.GetComponent<SpriteRenderer>().sortingOrder=-100;g.transform.position=new Vector3(95.5f,6,0);
    var d=JsonUtility.FromJson<Datos>(geometria.text);foreach(var c in d.cells)Solido(c.x,c.y,1,1,null);
    if(tipo==0){foreach(float x in new[]{81f,122.5f,141f,156f}){var p=Solido(x,5,3, .4f,duro);p.AddComponent<Plataforma>().origen=p.transform.position;}
     foreach(float x in new[]{18f,24f,40f,57f,65f,94f,103f,116f})Instantiate(goomba,new Vector3(x,3,0),Quaternion.identity);
     foreach(float x in new[]{33f,70f,110f})Instantiate(koopa,new Vector3(x,3,0),Quaternion.identity);
    }else{
-    foreach(float x in new[]{20f,35f,58f,82f,99f,118f,144f,166f}){var p=Visual("Cheep Cheep",pez,new Vector2(x,5+(x%4)),Vector2.one);p.AddComponent<PeligroNivel>().modo=1;}
-    foreach(float x in new[]{45f,75f,109f,151f}){var p=Visual("Blooper",calamar,new Vector2(x,7),Vector2.one);p.AddComponent<PeligroNivel>().modo=2;}
+    foreach(float x in new[]{20f,35f,58f,82f,99f,118f,144f,166f}){var p=Visual("Cheep Cheep",pez,new Vector2(x,5+(x%4)),Vector2.one);var a=p.AddComponent<PeligroNivel>();a.modo=1;a.animacion=pezAnimacion;}
+    foreach(float x in new[]{45f,75f,109f,151f}){var p=Visual("Blooper",calamar,new Vector2(x,7),Vector2.one);var a=p.AddComponent<PeligroNivel>();a.modo=2;a.animacion=calamarAnimacion;}
    }
    foreach(float x in new[]{12f,28f,46f,63f,91f,104f,135f,155f})for(int i=0;i<3;i++)Instantiate(moneda,new Vector3(x+i, tipo==0?4:6,0),Quaternion.identity);
   }else Castillo();
@@ -41,7 +41,7 @@ public class ReplicaNivel:MonoBehaviour
   bowser=Visual("Bowser",jefe,new Vector2(133,4.5f),new Vector2(2,2));bowser.AddComponent<PeligroNivel>().modo=4;
   var hacha=Visual("Hacha del puente",tubo,new Vector2(142,4.5f),new Vector2(.7f,1));hacha.AddComponent<FinalCastillo>();
  }
- void Update(){if(jugador==null||terminado)return;if(tipo<2&&jugador.position.x>=(tipo==0?168:187)){terminado=true;MejorasAudio.Play(880,.5f);GameManager.Instance.NextLevel();}}
+ void Update(){if(jugador==null||terminado)return;if(tipo<2&&jugador.position.x>=(tipo==0?165:187)){terminado=true;MejorasAudio.Play(880,.5f);GameManager.Instance.NextLevel();}}
 }
 public class Plataforma:MonoBehaviour
 {
@@ -51,9 +51,10 @@ public class Plataforma:MonoBehaviour
 }
 public class PeligroNivel:MonoBehaviour
 {
- public int modo;Vector3 inicio;float siguiente;
+ public int modo;public Sprite[] animacion;Vector3 inicio;float siguiente;
  void Start(){inicio=transform.position;var c=gameObject.AddComponent<BoxCollider2D>();c.isTrigger=true;c.size=Vector2.one*.65f;var b=gameObject.AddComponent<Rigidbody2D>();b.bodyType=RigidbodyType2D.Kinematic;}
  void Update(){float t=Time.time;
+  if(animacion!=null&&animacion.Length>0)GetComponent<SpriteRenderer>().sprite=animacion[(int)(t*5)%animacion.Length];
   if(modo==1||modo==2)transform.position=inicio+new Vector3(Mathf.Sin(t*(modo==1?.7f:1.2f))*2,Mathf.Sin(t*1.3f)*1.3f,0);
   if(modo==3){transform.position=inicio+new Vector3(Mathf.Cos(t*1.7f),Mathf.Sin(t*1.7f))*1.8f;}
   if(modo==4){transform.position=inicio+new Vector3(Mathf.Sin(t*.8f)*2,Mathf.Max(0,Mathf.Sin(t*1.5f))*1.8f,0);if(t>siguiente){siguiente=t+2.4f;var f=ReplicaNivel.Actual.Visual("Llama de Bowser",ReplicaNivel.Actual.fuego,transform.position+Vector3.left, new Vector2(1,.5f));f.AddComponent<PeligroNivel>().modo=5;}}

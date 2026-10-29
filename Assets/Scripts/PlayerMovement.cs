@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {
         HorizontalMovement();
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "2-2") {
-            if (Input.GetButtonDown("Jump")) { velocity.y = 5.5f; jumping = true; MejorasAudio.Play(660, .10f); }
+            if (Input.GetButtonDown("Jump")) Swim();
             velocity.y = Mathf.Max(velocity.y - 7f * Time.deltaTime, -3f);
             transform.position = new Vector3(transform.position.x, Mathf.Min(transform.position.y, 11.1f), transform.position.z);
             return;
@@ -77,6 +77,9 @@ public class PlayerMovement : MonoBehaviour
 
         rigidbody.MovePosition(position);
     }
+
+    // El impulso es el mismo para el teclado y las comprobaciones del modo acuático.
+    public void Swim() { velocity.y = 5.5f; jumping = true; MejorasAudio.Play(660, .10f); }
 
     private void HorizontalMovement()
     {

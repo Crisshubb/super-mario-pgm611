@@ -13,3 +13,5 @@
 - Castillo: distribución propia de plataformas, lava, trampas, puente y hacha; utiliza los recursos gráficos anteriores.
 
 Adaptación académica por Cristopher Iori Lazcano Gutierrez con asistencia de Codex. Mario y sus personajes pertenecen a Nintendo. No es un producto oficial ni se afirma autoría sobre sus recursos.
+
+- Llama de Bowser: https://www.mariowiki.com/File:SMB_Sprite_Bowser%27s_Flame.png

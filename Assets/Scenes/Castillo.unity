@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &545037392
+--- !u!1 &680037910
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,72 +127,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 545037394}
-  - component: {fileID: 545037393}
-  m_Layer: 0
-  m_Name: Nivel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &545037393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545037392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e396e4fbeade54dab6d7a1cca3af6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ReplicaNivel
-  tipo: 2
-  longitud: 192
-  mapa: {fileID: 0}
-  geometria: {fileID: 0}
-  mario: {fileID: 481021467160599391, guid: d83a5e7863a8afc4faee91819fff1fa7, type: 3}
-  goomba: {fileID: 4953937513092463115, guid: ae74545fba894724092dcceb2c7895ac, type: 3}
-  koopa: {fileID: 3611261760737888598, guid: 0724cbeea21c46642b57c4ace196dea7, type: 3}
-  moneda: {fileID: 841438207429839045, guid: 8268706537ea4644a879746713c1ec55, type: 3}
-  ladrillo: {fileID: 21300000, guid: 8b83c216454b12645b34432cf0f54860, type: 3}
-  duro: {fileID: 21300000, guid: 1f0849f53e6919c419ceef1ee743056e, type: 3}
-  tubo: {fileID: 21300000, guid: 904eec77acde2574699c0198147e141b, type: 3}
-  jefe: {fileID: 7022520054429482256, guid: 0bbcb990222aa104d9af4a773a1490de, type: 3}
-  pez: {fileID: -33560146411083255, guid: 9a6f0aeda914b5e478d0b4e40ef71ccc, type: 3}
-  calamar: {fileID: 686989082791863459, guid: e105902f8c6e3244893bcf512bb14e02, type: 3}
-  fuego: {fileID: 21300000, guid: e32a4768f0c7bd64daef776d29828724, type: 3}
-  jugador: {fileID: 0}
-  terminado: 0
-  puente: []
-  bowser: {fileID: 0}
---- !u!4 &545037394
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545037392}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1617103643
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1617103646}
-  - component: {fileID: 1617103645}
-  - component: {fileID: 1617103644}
+  - component: {fileID: 680037913}
+  - component: {fileID: 680037912}
+  - component: {fileID: 680037911}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -200,21 +137,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1617103644
+--- !u!81 &680037911
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617103643}
+  m_GameObject: {fileID: 680037910}
   m_Enabled: 1
---- !u!20 &1617103645
+--- !u!20 &680037912
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617103643}
+  m_GameObject: {fileID: 680037910}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -259,13 +196,82 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &1617103646
+--- !u!4 &680037913
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617103643}
+  m_GameObject: {fileID: 680037910}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1840826720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1840826722}
+  - component: {fileID: 1840826721}
+  m_Layer: 0
+  m_Name: Nivel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1840826721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840826720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e396e4fbeade54dab6d7a1cca3af6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReplicaNivel
+  tipo: 2
+  longitud: 192
+  mapa: {fileID: 0}
+  geometria: {fileID: 0}
+  mario: {fileID: 481021467160599391, guid: d83a5e7863a8afc4faee91819fff1fa7, type: 3}
+  goomba: {fileID: 4953937513092463115, guid: ae74545fba894724092dcceb2c7895ac, type: 3}
+  koopa: {fileID: 3611261760737888598, guid: 0724cbeea21c46642b57c4ace196dea7, type: 3}
+  moneda: {fileID: 841438207429839045, guid: 8268706537ea4644a879746713c1ec55, type: 3}
+  ladrillo: {fileID: 21300000, guid: 8b83c216454b12645b34432cf0f54860, type: 3}
+  duro: {fileID: 21300000, guid: 1f0849f53e6919c419ceef1ee743056e, type: 3}
+  tubo: {fileID: 21300000, guid: ef2cfec62d28ffa4fa3dc900eddc93ea, type: 3}
+  jefe: {fileID: 7022520054429482256, guid: 0bbcb990222aa104d9af4a773a1490de, type: 3}
+  pez: {fileID: -33560146411083255, guid: 9a6f0aeda914b5e478d0b4e40ef71ccc, type: 3}
+  calamar: {fileID: 686989082791863459, guid: e105902f8c6e3244893bcf512bb14e02, type: 3}
+  fuego: {fileID: 16332973837565794, guid: 74e9eb00e82037e4eb3797edd1ddabd8, type: 3}
+  pezAnimacion:
+  - {fileID: -33560146411083255, guid: 9a6f0aeda914b5e478d0b4e40ef71ccc, type: 3}
+  - {fileID: 8218490818316049207, guid: f4afafdc208c9c04bbaebe3cf8e8ca72, type: 3}
+  calamarAnimacion:
+  - {fileID: 686989082791863459, guid: e105902f8c6e3244893bcf512bb14e02, type: 3}
+  - {fileID: 5093659633400959609, guid: b4e241863bac8e04b95412a51e9be6de, type: 3}
+  jugador: {fileID: 0}
+  terminado: 0
+  puente: []
+  bowser: {fileID: 0}
+--- !u!4 &1840826722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840826720}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -278,5 +284,5 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1617103646}
-  - {fileID: 545037394}
+  - {fileID: 680037913}
+  - {fileID: 1840826722}
