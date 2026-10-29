@@ -7,6 +7,7 @@ public class DeathBarrier : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            MejorasAudio.Play(180,.5f);
             other.gameObject.SetActive(false);
             GameManager.Instance.ResetLevel(3f);
         }

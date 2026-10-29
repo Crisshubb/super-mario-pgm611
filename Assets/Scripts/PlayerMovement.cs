@@ -48,6 +48,12 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         HorizontalMovement();
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "2-2") {
+            if (Input.GetButtonDown("Jump")) { velocity.y = 5.5f; jumping = true; MejorasAudio.Play(660, .10f); }
+            velocity.y = Mathf.Max(velocity.y - 7f * Time.deltaTime, -3f);
+            transform.position = new Vector3(transform.position.x, Mathf.Min(transform.position.y, 11.1f), transform.position.z);
+            return;
+        }
 
         grounded = rigidbody.Raycast(Vector2.down);
 
@@ -100,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
         // perform jump
         if (Input.GetButtonDown("Jump"))
         {
+            MejorasAudio.Play(520, .12f);
             velocity.y = jumpForce;
             jumping = true;
         }
