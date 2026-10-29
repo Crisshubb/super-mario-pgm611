@@ -26,6 +26,12 @@ public class ReplicaNivel:MonoBehaviour
    foreach(float x in new[]{12f,28f,46f,63f,91f,104f,135f,155f})for(int i=0;i<3;i++)Instantiate(moneda,new Vector3(x+i, tipo==0?4:6,0),Quaternion.identity);
   }else Castillo();
   jugador=Instantiate(mario,new Vector3(3,3,0),Quaternion.identity).transform;
+  if(tipo==2){
+   jugador.GetComponent<Collider2D>().sharedMaterial=Plataforma.MaterialSinFriccion;
+   var cuerpo=jugador.GetComponent<Rigidbody2D>();
+   cuerpo.collisionDetectionMode=CollisionDetectionMode2D.Continuous;
+   cuerpo.interpolation=RigidbodyInterpolation2D.Interpolate;
+  }
   Camera.main.gameObject.AddComponent<SideScrolling>();
   var muerte=new GameObject("Caida");muerte.transform.position=new Vector3(longitud/2,-5);var c2=muerte.AddComponent<BoxCollider2D>();c2.size=new Vector2(longitud+30,3);c2.isTrigger=true;muerte.AddComponent<DeathBarrier>();
  }
@@ -35,7 +41,7 @@ public class ReplicaNivel:MonoBehaviour
   for(int x=0;x<152;x++){bool hueco=(x>=20&&x<25)||(x>=41&&x<47)||(x>=64&&x<69)||(x>=86&&x<92)||(x>=110&&x<116);if(!hueco)Solido(x,1,1,2,ladrillo);else{var lava=Visual("Lava",fuego,new Vector2(x,-.4f),new Vector2(1,1));lava.AddComponent<PeligroNivel>().modo=0;}}
   for(int x=0;x<152;x+=3)Visual("Boveda",ladrillo,new Vector2(x,13),new Vector2(3,2));
   foreach(float x in new[]{14f,34f,56f,77f,100f,119f}){Solido(x,3,3,1,duro);var centro=Visual("Barra de fuego",fuego,new Vector2(x,5),new Vector2(.5f,.5f));centro.AddComponent<PeligroNivel>().modo=3;}
-  foreach(float x in new[]{23f,44f,67f,89f,113f}){var p=Solido(x,3,3,.4f,duro);p.AddComponent<Plataforma>().origen=p.transform.position;}
+  foreach(float x in new[]{23f,44f,67f,89f,113f}){var p=Solido(x,3,3,.4f,duro);var a=p.AddComponent<Plataforma>();a.origen=p.transform.position;a.fisicaCastillo=true;}
   foreach(float x in new[]{10f,31f,52f,73f,96f,121f})for(int i=0;i<3;i++)Instantiate(moneda,new Vector3(x+i,5,0),Quaternion.identity);
   for(int x=126;x<=140;x++)puente.Add(Solido(x,3,1,.5f,ladrillo));
   bowser=Visual("Bowser",jefe,new Vector2(133,4.5f),new Vector2(2,2));bowser.AddComponent<PeligroNivel>().modo=4;
@@ -45,9 +51,28 @@ public class ReplicaNivel:MonoBehaviour
 }
 public class Plataforma:MonoBehaviour
 {
- public Vector3 origen;void Update(){transform.position=origen+Vector3.up*Mathf.Sin(Time.time*1.3f)*1.5f;}
- void OnCollisionEnter2D(Collision2D c){if(c.gameObject.CompareTag("Player"))c.transform.SetParent(transform);}
- void OnCollisionExit2D(Collision2D c){if(c.gameObject.CompareTag("Player"))c.transform.SetParent(null);}
+ public Vector3 origen;
+ public bool fisicaCastillo;
+ Rigidbody2D cuerpo;
+ static PhysicsMaterial2D material;
+ public static PhysicsMaterial2D MaterialSinFriccion {
+  get {if(material==null)material=new PhysicsMaterial2D("Castillo sin adherencia"){friction=0,bounciness=0};return material;}
+ }
+ void Start(){
+  if(!fisicaCastillo)return;
+  cuerpo=gameObject.AddComponent<Rigidbody2D>();
+  cuerpo.bodyType=RigidbodyType2D.Kinematic;
+  cuerpo.interpolation=RigidbodyInterpolation2D.Interpolate;
+  cuerpo.collisionDetectionMode=CollisionDetectionMode2D.Continuous;
+  GetComponent<Collider2D>().sharedMaterial=MaterialSinFriccion;
+ }
+ void Update(){if(!fisicaCastillo)transform.position=origen+Vector3.up*Mathf.Sin(Time.time*1.3f)*1.5f;}
+ void FixedUpdate(){
+  // Movimiento sincronizado con la física, sin vincular el cuerpo de Mario a la plataforma.
+  if(fisicaCastillo&&cuerpo!=null)cuerpo.MovePosition((Vector2)origen+Vector2.up*Mathf.Sin(Time.fixedTime*1.3f)*1.5f);
+ }
+ void OnCollisionEnter2D(Collision2D c){if(!fisicaCastillo&&c.gameObject.CompareTag("Player"))c.transform.SetParent(transform);}
+ void OnCollisionExit2D(Collision2D c){if(!fisicaCastillo&&c.gameObject.CompareTag("Player"))c.transform.SetParent(null);}
 }
 public class PeligroNivel:MonoBehaviour
 {
