@@ -20,4 +20,14 @@ El editor mostró una excepción en `UnityEditor.Search.SearchDatabase` al inici
 
 Para repetir: abrir el proyecto con la versión indicada y ejecutar `PruebasEntrega.Ejecutar` mediante Unity en modo batch, sin `-quit` (el propio verificador termina el proceso). Para compilar, usar **Entrega > Compilar Windows**. Para empaquetar, ejecutar `python Herramientas/empaquetar.py`.
 
-La compilaci�n final, posterior a las correcciones de c�mara, salida y sprites, termin� con `MARIO_BUILD_OK`.
+La compilación final, posterior a las correcciones de cámara, salida y sprites, terminó con `MARIO_BUILD_OK`.
+
+## Corrección 1.0.1 del castillo
+
+`PruebasCastillo.Ejecutar` aprobó 62 comprobaciones en Play Mode. En cada una de las cinco plataformas se comprobó aterrizaje, desplazamiento horizontal, impulso de salto y contacto inferior/lateral, usando la física real de Unity con dirección e impulso controlados por el verificador. Mario no quedó como hijo de la plataforma, mantuvo su controlador activo y pudo moverse después del contacto. No se perdieron vidas en los casos de prueba.
+
+Las plataformas del castillo utilizan Rigidbody2D cinemático con MovePosition en FixedUpdate. Se retiró el vínculo de Transform entre plataforma y personaje, y se aplicó fricción cero únicamente al personaje y las plataformas del castillo. La prueba también verificó que las plataformas subterráneas conservan su modo anterior y que el material especial no se aplica al jugador de ese nivel.
+
+Los menús cargan Silkscreen desde Resources, incluida su licencia OFL. Se verificó la disponibilidad de la fuente durante la ejecución. El HUD mantiene su tipografía anterior. Las comprobaciones controladas no sustituyen una partida manual completa.
+
+La regresión de campaña volvió a aprobar las 20 comprobaciones tras estos cambios. La compilación Windows 1.0.1 terminó con `MARIO_BUILD_OK`.

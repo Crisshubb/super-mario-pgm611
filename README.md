@@ -2,7 +2,7 @@
 
 Entrega académica en Unity 6000.3.11f1 basada en el proyecto 2D original de Jesusbautistah. Este fork conserva su historial y autores.
 
-**[Descargar el ejecutable Windows](https://github.com/Crisshubb/super-mario-pgm611/releases/tag/v1.0.0)**. Extraer todo el ZIP y ejecutar `Mario-PGM611.exe`; no hace falta Unity para jugar.
+**[Descargar el ejecutable Windows](https://github.com/Crisshubb/super-mario-pgm611/releases/tag/v1.0.1)**. Extraer todo el ZIP y ejecutar `Mario-PGM611.exe`; no hace falta Unity para jugar.
 
 ## Mejoras agregadas
 
@@ -20,7 +20,7 @@ A/D o flechas: mover. Espacio: saltar/nadar. S: entrar en tuberías del nivel in
 
 Ruta de campaña: **1-1 > 1-2 > 2-2 > Castillo > Victoria**. En el castillo, alcanza la estrella detrás de Bowser para activar el interruptor del puente.
 
-Para editar, clonar y abrir la raíz de este repositorio en Unity 6000.3.11f1. Abrir `Assets/Scenes/Menu.unity`. **Entrega > Preparar niveles** regenera las escenas añadidas; **Entrega > Compilar Windows** genera el ejecutable en `../Entrega/Windows`. `Herramientas/empaquetar.py` crea el ZIP y su SHA-256.
+Para editar, clonar y abrir la raíz de este repositorio en Unity 6000.3.11f1. Abrir `Assets/Scenes/Menu.unity`. **Entrega > Preparar niveles** regenera las escenas añadidas; **Entrega > Compilar Windows** genera el ejecutable en `../Entrega/Windows-1.0.1`. `Herramientas/empaquetar.py` crea el ZIP y su SHA-256.
 
 ## Referencia original
 

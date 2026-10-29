@@ -15,3 +15,5 @@
 Adaptación académica por Cristopher Iori Lazcano Gutierrez con asistencia de Codex. Mario y sus personajes pertenecen a Nintendo. No es un producto oficial ni se afirma autoría sobre sus recursos.
 
 - Llama de Bowser: https://www.mariowiki.com/File:SMB_Sprite_Bowser%27s_Flame.png
+
+- Fuente de los menús desde la versión 1.0.1: Silkscreen, por Jason Kottke y colaboradores. Se incluye la licencia SIL Open Font License en Assets/Resources/Fuentes/OFL.txt. Fuente procedente de la colección usada en Cartal, sin cambios en su archivo TTF.

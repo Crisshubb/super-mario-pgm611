@@ -2,14 +2,19 @@
 from pathlib import Path
 import hashlib
 import zipfile
+import re
 
 project = Path(__file__).resolve().parents[1]
 delivery = project.parent / 'Entrega'
-windows = delivery / 'Windows'
+settings = (project / 'ProjectSettings/ProjectSettings.asset').read_text(encoding='utf-8')
+version = re.search(r'^\s*bundleVersion:\s*(\S+)', settings, re.M).group(1)
+windows = delivery / ('Windows-' + version)
+if version == '1.0.0' and not windows.exists():
+    windows = delivery / 'Windows'
 assert (windows / 'Mario-PGM611.exe').is_file(), 'Compilar primero desde Entrega > Compilar Windows'
 assert (windows / 'UnityPlayer.dll').is_file()
 assert (windows / 'Mario-PGM611_Data').is_dir()
-archive = delivery / 'Mario-PGM611-Windows.zip'
+archive = delivery / ('Mario-PGM611-Windows-v' + version + '.zip')
 guide = '''MARIO PGM611 - CRISTOPHER IORI LAZCANO GUTIERREZ
 
 Extraer TODO el ZIP y ejecutar Mario-PGM611.exe.
